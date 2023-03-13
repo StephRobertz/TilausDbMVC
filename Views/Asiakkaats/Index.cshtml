@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TilausDbMVC.Models.Asiakkaat>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Asiakkaat</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nimi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Osoite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nimi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Osoite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Postitoimipaikat.Postitoimipaikka)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.AsiakasID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.AsiakasID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.AsiakasID })*@
+
+            <a class="btn btn-primary" href="~/Asiakkaats/Edit/@item.AsiakasID">
+                <img src="~/Icons/pencil-square.svg" />
+            </a>
+            <a class="btn btn-primary" href="~/Asiakkaats/Details/@item.AsiakasID">
+                <img src="~/Icons/info-square-fill.svg"/>
+            </a>
+
+            <a class="btn btn-primary" href="~/Asiakkaats/Delete/@item.AsiakasID">
+                <img src="~/Icons/trash3.svg" />
+            </a>
+        </td>
+    </tr>
+}
+
+</table>
