@@ -132,6 +132,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TilauksetController.cs" />
     <Compile Include="Controllers\TuotteetController.cs" />
     <Compile Include="Models\Asiakkaat.cs">
       <DependentUpon>TilausDBModel.tt</DependentUpon>
@@ -178,6 +179,8 @@
     <Compile Include="Models\Tuotteet.cs">
       <DependentUpon>TilausDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\OrderRows.cs" />
+    <Compile Include="ViewModels\OrderSummaryData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -2224,6 +2227,16 @@
     <Content Include="Views\Tuotteet\Edit.cshtml" />
     <Content Include="Views\Tuotteet\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_NavbarLoggedIn.cshtml" />
+    <Content Include="Views\Shared\_NavbarLoggedOut.cshtml" />
+    <Content Include="Views\Tilaukset\Create.cshtml" />
+    <Content Include="Views\Tilaukset\Delete.cshtml" />
+    <Content Include="Views\Tilaukset\Details.cshtml" />
+    <Content Include="Views\Tilaukset\Edit.cshtml" />
+    <Content Include="Views\Tilaukset\Index.cshtml" />
+    <Content Include="Views\Tilaukset\TilausOtsikot.cshtml" />
+    <Content Include="Views\Tilaukset\Ordersummary.cshtml" />
+    <Content Include="Views\Tilaukset\_TilausRivit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

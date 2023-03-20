@@ -1,0 +1,125 @@
+﻿@model IEnumerable<TilausDbMVC.Models.Tilaukset>
+
+@{
+    ViewBag.Title = "TilausOtsikot";
+}
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(".showOrderClass").click(function () {
+                let tilausId = $(this).data("tilausid");
+                //alert("Klikkasit tilausnumeroa: " + tilausId);
+                //document.getElementById("OrderID").value = orderId;
+
+                //PartialView:
+                var url = "/Tilaukset/_TilausRivit/?TilausID=" + tilausId;
+                $("#orderDetails_" + tilausId).append(" <b>Loading order " + tilausId +
+                " rows...</b>");
+                var $detailDiv = $("#orderDetails_" + tilausId);
+                console.log(url);
+                console.log($detailDiv);
+                $.get(url, function (data) {
+                $detailDiv.replaceWith(data);
+                });
+            });
+        });
+    </script>
+}
+
+<h2>TilausOtsikot</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<!--//koko selaimen alue käyttöön-->
+<div class="container-fluid">
+    <div class="card-header">
+        <a class="card-link">
+            <form>
+                <div class="input-group input-group-lg mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text text-bg-secondary bg-warning font-weight-bold">Tilaus</span>
+                    </div>
+                    <input type="text" class="form-control bg-warning text-bg-secondary font-weight-bold px-2" value="Asiakas" disabled>
+                    <input type="text" class="form-control bg-warning text-bg-secondary font-weight-bold px-2" value="Postitoimipaikka" disabled>
+                    <input type="text" class="form-control bg-warning text-bg-secondary font-weight-bold px-2" value="Toimitusosoite" disabled>
+                    <input type="text" class="form-control bg-warning text-bg-secondary font-weight-bold px-2" value="Tilauspvm" disabled>
+                    <input type="text" class="form-control bg-warning text-bg-secondary font-weight-bold px-2" value="Toimituspvm" disabled>
+
+
+
+                </div>
+            </form>
+        </a>
+    </div>
+
+
+    <div id="accordion">
+
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <!--BS5-->
+                    <a class="card-link showOrderClass" data-orderid="@item.TilausID" data-bs-toggle="collapse" href="#collapse_@item.TilausID">
+                        <form>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@item.TilausID</span>
+                                </div>
+
+                                @*<input type="text" class="form-control px-2" value="@item.TilausID" disabled>*@
+                                <input type="text" class="form-control px-2" value="@item.Asiakkaat.Nimi" disabled>
+                                <input type="text" class="form-control px-2" value="@item.Postitoimipaikat.Postitoimipaikka" disabled>
+                                <input type="text" class="form-control px-2" value="@item.Toimitusosoite" disabled>
+                                <input type="text" class="form-control px-2" value="@item.Tilauspvm" disabled>
+                                <input type="text" class="form-control px-2" value="@item.Toimituspvm" disabled>
+
+
+
+                            </div>
+                        </form>
+                    </a>
+                </div>
+                <!--BS5-->
+                <div id="collapse_@item.TilausID" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <p>Ladataan tilauksen @item.TilausID rivit</p>
+                        <!--jQuery renderöi tilauksen rivitiedot-->
+                        <div id="orderDetails_@item.TilausID"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+@*<tr class="showOrderClass" data-tilausid="@item.TilausID">
+        <td>@Html.DisplayFor(modelItem => item.Toimitusosoite)</td>
+        <td>@Html.DisplayFor(modelItem => item.Tilauspvm)</td>
+        <td>@Html.DisplayFor(modelItem => item.Toimituspvm)</td>
+        <td>@Html.DisplayFor(modelItem => item.Asiakkaat.Nimi)</td>
+        <td>@Html.DisplayFor(modelItem => item.Postitoimipaikat.Postitoimipaikka)</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.TilausID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.TilausID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.TilausID })
+        </td>
+    </tr>*@
+
+
+
+
+@*<th>@Html.DisplayNameFor(model => model.Toimitusosoite)</th>
+    <th>@Html.DisplayNameFor(model => model.Tilauspvm)</th>
+    <th>@Html.DisplayNameFor(model => model.Toimituspvm)</th>
+    <th>@Html.DisplayNameFor(model => model.Asiakkaat.Nimi)</th>
+    <th>@Html.DisplayNameFor(model => model.Postitoimipaikat.Postitoimipaikka)</th>
+    <th></th>
+        </tr>*@
